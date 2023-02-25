@@ -1,7 +1,7 @@
 const express = require("express");
 var app = express();
 const PORT = 3001;
-
+const cors = require('cors')
 const blogs = [];
 const Sequelize = require('sequelize');
 const { Post } = require('./models');
@@ -9,6 +9,7 @@ console.log(Post)
 const db = require('./models');
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
+app.use(cors())
 // console.log(db.findAll())
 // console.log(Post.findAll())
 
@@ -44,7 +45,7 @@ app.delete('/posts/:id', async (req, res) => {
     res.json(deletedPost);
 });
 // update post
-app.post('/posts/:id', async (req, res) => {
+app.put('/posts/:id', async (req, res) => {
     const { id } = req.params;
 
     // Assuming that `req.body` is limited to
